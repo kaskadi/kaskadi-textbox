@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>kaskadi-textbox example</title>
     <script type="module" src="../kaskadi-textbox.js"></script>
+
     <style>
       * {
         font-family: Roboto;
@@ -13,10 +14,14 @@
         margin: 0;
         padding: 0;
       }
+      div{padding:20px}
     </style>
   </head>
   <body>
-    trigger build
-    <kaskadi-textbox></kaskadi-textbox>
+    <div>
+      <kaskadi-textbox icon="/example/lgtm.svg" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
+      <kaskadi-textbox style="--label-background: royalblue; --border-color: #333; --label-color: white" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
+      <kaskadi-textbox lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
+    </div>
   </body>
 </html>
