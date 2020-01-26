@@ -1,0 +1,24 @@
+name: init
+on:
+  create:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install kaskadi-cli
+      run: npm i kaskadi-cli
+    - name: Init
+      run: | 
+        ./node_modules/kaskadi-cli/kaskadi init
+        npm rm kaskadi-cli
+    - name: Commit files
+      run: |
+        git config --global user.name 'Holger Will'
+        git config --global user.email 'h.will@klimapartner.de'
+        git add *.js
+        git rm .github/workflows/init.yml
+        git commit -am "Initial commit"
+        git push
