@@ -1,8 +1,8 @@
 {
-  "name": "template-kaskadi-element",
+  "name": "kaskadi-textbox",
   "version": "1.0.0",
   "description": "",
-  "main": "template-kaskadi-element.js",
+  "main": "kaskadi-textbox.js",
   "directories": {
     "example": "example",
     "test": "test"
@@ -19,25 +19,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaskadi/template-kaskadi-element.git"
+    "url": "git+https://github.com/kaskadi/kaskadi-textbox.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kaskadi/template-kaskadi-element/issues"
+    "url": "https://github.com/kaskadi/kaskadi-textbox/issues"
   },
-  "homepage": "https://github.com/kaskadi/template-kaskadi-element#readme",
+  "homepage": "https://github.com/kaskadi/kaskadi-textbox#readme",
   "kaskadi": {
     "s3-push": {
       "files": [
         {
-          "src": "template-kaskadi-element.js",
-          "dest": "modules/@kaskadi/template-kaskadi-element/{branch}template-kaskadi-element.js"
+          "src": "kaskadi-textbox.js",
+          "dest": "modules/@kaskadi/kaskadi-textbox/{branch}kaskadi-textbox.js"
         },
         {
           "src": "example/index.html",
-          "dest": "modules/@kaskadi/template-kaskadi-element/{branch}example/index.html"
+          "dest": "modules/@kaskadi/kaskadi-textbox/{branch}example/index.html"
         }
       ]
     }
