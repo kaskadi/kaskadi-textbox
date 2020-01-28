@@ -15,9 +15,16 @@ class KaskadiTextbox extends KaskadiElement {
       :host{
         display: inline-block;
       }
-      #outer{display: flex; width: var(--width, 250px) }
-      .border{border-style: solid; border-color: var(--border-color, #aaa);}
-      .height{height: var(--height, 30px);padding: var(--border-radius, 8px);}
+      #outer{
+        display: flex;
+        width: var(--width, 250px);
+        height: var(--height, 30px);
+        border: var(--border, 1px solid var(--border-color, #aaa));
+        border-radius: var(--border-radius, 8px);
+        overflow: hidden;
+      }
+      /* .border{border-style: solid; border-color: var(--border-color, #aaa);}
+      .height{height: var(--height, 30px);padding: var(--border-radius, 8px);} */
 
       ${textBoxStyles()}
       ${startLabelStyles()}
@@ -41,17 +48,15 @@ class KaskadiTextbox extends KaskadiElement {
   }
 
   fireChangeEvent () {
-  //  const evt = document.createCustomEvent('chane')
+  //  const evt = document.createCustomEvent('change')
   }
 
   render () {
     return html`
       <div id="outer">
         <div id="start_label" class="border height ${this.labelHidden ? 'hidden' : ''}" >
-
           <div id="icon">${this.icon ? html`<img src="${this.icon}" height="100%" style="padding-right:5px"/>` : ''}</div>
           <div id="label_text">${translate(this.label, this.lang)}</div>
-          <div></div>
         </div>
         <div id="text" contentEditable="true" class="border height" @keydown="${this.keydown}"></div>
         <div id="end_label" class="border height"></div>
@@ -84,6 +89,7 @@ function startLabelStyles () {
     .hidden #icon{display:none}
     #start_label.hidden{background: white;}
     #start_label{
+      z-index: 1;
       display:flex;
       user-select: none;
       width: var(--start-label-width, auto);
@@ -91,8 +97,7 @@ function startLabelStyles () {
       color: var(--label-color, #ddd);
       background: var(--label-background, #fafafa);
       padding: var(--padding, 5px);
-      border-radius: var(--border-radius, 8px) 0 0 var(--border-radius, 8px);
-      border-width: var(--border-width, 1px) 0 var(--border-width, 1px) var(--border-width, 1px);
+
     }
   `
 }
