@@ -8,6 +8,7 @@ class KaskadiTextbox extends KaskadiElement {
     this.labelHidden = false
     this.lang = 'en'
     this.icon = null
+    this.lastValueFired = ''
   }
 
   static get styles () {
@@ -23,9 +24,6 @@ class KaskadiTextbox extends KaskadiElement {
         border-radius: var(--border-radius, 8px);
         overflow: hidden;
       }
-      /* .border{border-style: solid; border-color: var(--border-color, #aaa);}
-      .height{height: var(--height, 30px);padding: var(--border-radius, 8px);} */
-
       ${textBoxStyles()}
       ${startLabelStyles()}
       ${endLabelStyles()}
@@ -41,31 +39,67 @@ class KaskadiTextbox extends KaskadiElement {
     }
   }
 
+  get value () {
+    return this.shadowRoot.querySelector('#text').innerText
+  }
+  set value (s) {
+    s = s.replace(/\n/g, '')
+    this.shadowRoot.querySelector('#text').innerText = s
+    this.fireInputEvent()
+  }
+
   keydown (evt) {
     if (evt.key === 'Enter') {
       evt.preventDefault()
+      this.fireInputEvent()
     }
   }
 
-  fireChangeEvent () {
-  //  const evt = document.createCustomEvent('change')
+  paste (evt) {
+    this.value = evt.clipboardData.getData('Text')
+    moveCursorToEndOfNode(evt.target)
+    evt.preventDefault()
+    this.fireInputEvent()
+  }
+
+  blur (evt) {
+    this.fireInputEvent()
+  }
+
+  fireInputEvent () {
+    if (this.lastValueFired !== this.value) {
+      const evt = new CustomEvent('change', {
+        detail: this.value
+      })
+      this.dispatchEvent(evt)
+      this.lastValueFired = this.value
+    }
   }
 
   render () {
     return html`
       <div id="outer">
-        <div id="start_label" class="border height ${this.labelHidden ? 'hidden' : ''}" >
+        <div id="start_label" class=" ${this.labelHidden ? 'hidden' : ''}" >
           <div id="icon">${this.icon ? html`<img src="${this.icon}" height="100%" style="padding-right:5px"/>` : ''}</div>
           <div id="label_text">${translate(this.label, this.lang)}</div>
         </div>
-        <div id="text" contentEditable="true" class="border height" @keydown="${this.keydown}"></div>
-        <div id="end_label" class="border height"></div>
+        <div id="text" contentEditable="true" @blur="${this.blur}" @paste="${this.paste}" @keydown="${this.keydown}"></div>
+        <div id="end_label"></div>
       </div>
     `
   }
 }
 
 customElements.define('kaskadi-textbox', KaskadiTextbox)
+
+function moveCursorToEndOfNode (node) {
+  let sel = window.getSelection()
+  const range = document.createRange()
+  range.selectNodeContents(node)
+  range.collapse(false)
+  sel.removeAllRanges()
+  sel.addRange(range)
+}
 
 function textBoxStyles () {
   return css`
@@ -78,7 +112,6 @@ function textBoxStyles () {
       width: 100%;
       white-space: nowrap;
       padding: var(--padding, 5px);
-      border-width: var(--border-width, 1px) 0 var(--border-width, 1px) 0;
     }
   `
 }
