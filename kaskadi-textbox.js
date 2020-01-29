@@ -42,6 +42,7 @@ class KaskadiTextbox extends KaskadiElement {
   get value () {
     return this.shadowRoot.querySelector('#text').innerText
   }
+
   set value (s) {
     s = s.replace(/\n/g, '')
     this.shadowRoot.querySelector('#text').innerText = s
@@ -57,7 +58,7 @@ class KaskadiTextbox extends KaskadiElement {
 
   paste (evt) {
     this.value = evt.clipboardData.getData('Text')
-    moveCursorToEndOfNode(evt.target)
+    moveCursorToEndOfNode(this.shadowRoot.querySelector('#text'))
     evt.preventDefault()
     this.fireInputEvent()
   }
@@ -93,7 +94,7 @@ class KaskadiTextbox extends KaskadiElement {
 customElements.define('kaskadi-textbox', KaskadiTextbox)
 
 function moveCursorToEndOfNode (node) {
-  let sel = window.getSelection()
+  const sel = window.getSelection()
   const range = document.createRange()
   range.selectNodeContents(node)
   range.collapse(false)

@@ -17,16 +17,24 @@
       div{padding:20px}
     </style>
   </head>
-  <body>
+  <body >
     <div>
-      <kaskadi-textbox onchange="test(event)" icon="/example/lgtm.svg" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
+      <kaskadi-textbox  id="tb" icon="/example/lgtm.svg" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
       <kaskadi-textbox style="--label-background: palegreen; --border-color: royalblue; --label-color: white" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
       <kaskadi-textbox lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
     </div>
     <script>
-      function test(evt){
-        console.log(evt)
+
+    window.addEventListener('DOMContentLoaded', async (event) => {
+      await tb.updateComplete
+      tb.focus()
+      var data = new DataTransfer()
+      data.setData('Text', '123\n123')
+      let evt =  {
+        clipboardData: data
       }
+      tb.paste(evt)
+    })
     </script>
   </body>
 </html>
