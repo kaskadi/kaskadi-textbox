@@ -11,25 +11,6 @@ class KaskadiTextbox extends KaskadiElement {
     this.lastValueFired = ''
   }
 
-  static get styles () {
-    return css`
-      :host{
-        display: inline-block;
-      }
-      #outer{
-        display: flex;
-        width: var(--width, 250px);
-        height: var(--height, 30px);
-        border: var(--border, 1px solid var(--border-color, #aaa));
-        border-radius: var(--border-radius, 8px);
-        overflow: hidden;
-      }
-      ${textBoxStyles()}
-      ${startLabelStyles()}
-      ${endLabelStyles()}
-    `
-  }
-
   static get properties () {
     return {
       lang: { type: String },
@@ -77,11 +58,31 @@ class KaskadiTextbox extends KaskadiElement {
     }
   }
 
+  static get styles () {
+    return css`
+      :host{
+        display: inline-block;
+      }
+      #outer{
+        display: flex;
+        width: var(--width, 250px);
+        height: var(--height, 30px);
+        border: var(--border, 1px solid var(--border-color, #aaa));
+        border-radius: var(--border-radius, 8px);
+        overflow: hidden;
+      }
+      #icon img{margin-right:5px}
+      ${textBoxStyles()}
+      ${startLabelStyles()}
+      ${endLabelStyles()}
+    `
+  }
+
   render () {
     return html`
       <div id="outer">
         <div id="start_label" class=" ${this.labelHidden ? 'hidden' : ''}" >
-          <div id="icon">${this.icon ? html`<img src="${this.icon}" height="100%" style="padding-right:5px"/>` : ''}</div>
+          <div id="icon">${this.icon ? html`<img src="${this.icon}" height="20px" width="20px"/>` : ''}</div>
           <div id="label_text">${translate(this.label, this.lang)}</div>
         </div>
         <div id="text" contentEditable="true" @blur="${this.blur}" @paste="${this.paste}" @keydown="${this.keydown}"></div>
@@ -119,19 +120,16 @@ function textBoxStyles () {
 
 function startLabelStyles () {
   return css`
-    .hidden #label_text{display:none}
-    .hidden #icon{display:none}
-    #start_label.hidden{background: white;}
+    #start_label.hidden {display:none}
     #start_label{
-      z-index: 1;
       display:flex;
+      justify-content:center;
       user-select: none;
       width: var(--start-label-width, auto);
       box-sizing: border-box;
       color: var(--label-color, #ddd);
       background: var(--label-background, #fafafa);
       padding: var(--padding, 5px);
-
     }
   `
 }

@@ -31,7 +31,8 @@
       var data = new DataTransfer()
       data.setData('Text', '123\n123')
       let evt =  {
-        clipboardData: data
+        clipboardData: data,
+        preventDefault: ()=>{}
       }
       tb.paste(evt)
     })
