@@ -16,8 +16,7 @@ class KaskadiTextbox extends KaskadiElement {
       lang: { type: String },
       labelHidden: { type: Boolean },
       label: { type: Array },
-      icon: { type: String },
-      typePwd: { type: Boolean }
+      icon: { type: String }
     }
   }
 
@@ -73,9 +72,6 @@ class KaskadiTextbox extends KaskadiElement {
         overflow: hidden;
       }
       #icon img{margin-right:5px}
-      .pwd {
-        font-family: Password;
-      }
       ${textBoxStyles()}
       ${startLabelStyles()}
       ${endLabelStyles()}
@@ -89,7 +85,7 @@ class KaskadiTextbox extends KaskadiElement {
           <div id="icon">${this.icon ? html`<img src="${this.icon}" height="20px" width="20px"/>` : ''}</div>
           <div id="label_text">${translate(this.label, this.lang)}</div>
         </div>
-        <div id="text" class=${this.typePwd ? 'pwd' : ''} contentEditable="true" @blur="${this.blur}" @paste="${this.paste}" @keydown="${this.keydown}"></div>
+        <div id="text" contentEditable="true" @blur="${this.blur}" @paste="${this.paste}" @keydown="${this.keydown}"></div>
         <div id="end_label"></div>
       </div>
     `
@@ -111,6 +107,7 @@ function textBoxStyles () {
   return css`
     #text:focus{outline:0}
     #text{
+      font-family: var(--text-font, 'Roboto')
       overflow: hidden;
       box-sizing: border-box;
       color: #333;
@@ -126,6 +123,7 @@ function startLabelStyles () {
   return css`
     #start_label.hidden {display:none}
     #start_label{
+      font-family: var(--label-font, 'Roboto')
       display:flex;
       justify-content:center;
       user-select: none;
