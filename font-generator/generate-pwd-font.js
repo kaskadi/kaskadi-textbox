@@ -20,4 +20,4 @@ ${glyphs}
 </svg>`
 
 const ttf = svg2ttf(svg, {})
-fs.writeFileSync('pwd-font.ttf', new Buffer(ttf.buffer))
+fs.writeFileSync('pwd-font.ttf', Buffer.from(ttf.buffer))
