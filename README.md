@@ -11,13 +11,13 @@
 <!-- This badge should only be used for master and release/* branches. Otherwise use the one above -->
 ![](https://img.shields.io/github/workflow/status/kaskadi/kaskadi-textbox/build-on-firefox?label=firefox&logo=Mozilla%20Firefox&logoColor=white)
 ![](https://img.shields.io/github/workflow/status/kaskadi/kaskadi-textbox/build-on-chrome?label=chrome&logo=Google%20Chrome&logoColor=white)
-![](https://img.shields.io/github/workflow/status/kaskadi/kaskadi-textbox/publish?label=publish&logo=AWS)
+![](https://img.shields.io/github/workflow/status/kaskadi/kaskadi-textbox/publish?label=publish&logo=Amazon%20AWS)
 
 **CodeClimate**
 
-![](https://img.shields.io/codeclimate/maintainability/kaskadi/kaskadi-textbox)
-![](https://img.shields.io/codeclimate/tech-debt/kaskadi/kaskadi-textbox)
-![](https://img.shields.io/codeclimate/coverage/kaskadi/kaskadi-textbox)
+[![](https://img.shields.io/codeclimate/maintainability/kaskadi/kaskadi-textbox?label=maintainability&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/kaskadi-textbox)
+[![](https://img.shields.io/codeclimate/tech-debt/kaskadi/kaskadi-textbox?label=technical%20debt&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/kaskadi-textbox)
+[![](https://img.shields.io/codeclimate/coverage/kaskadi/kaskadi-textbox?label=test%20coverage&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/kaskadi-textbox)
 
 **LGTM**
 
