@@ -7,7 +7,7 @@ class KaskadiTextbox extends KaskadiElement {
     super()
     this.labelHidden = false
     this.lang = 'en'
-    this.icon = null
+    this.icon = ''
     this.lastValueFired = ''
   }
 
@@ -82,7 +82,7 @@ class KaskadiTextbox extends KaskadiElement {
     return html`
       <div id="outer">
         <div id="start_label" class=" ${this.labelHidden ? 'hidden' : ''}" >
-          <div id="icon">${this.icon ? html`<img src="${this.icon}" height="20px" width="20px"/>` : ''}</div>
+          <div id="icon">${this.icon.length > 0 ? html`<img src="${this.icon}" height="20px" width="20px"/>` : html``}</div>
           <div id="label_text">${translate(this.label, this.lang)}</div>
         </div>
         <div id="text" contentEditable="true" @blur="${this.blur}" @paste="${this.paste}" @keydown="${this.keydown}"></div>

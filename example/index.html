@@ -6,10 +6,6 @@
     <title>kaskadi-textbox example</title>
     <script type="module" src="../kaskadi-textbox.js"></script>
     <style>
-      @font-face {
-        font-family: "Password";
-        src: url("../font-generator/pwd-font.ttf") format("truetype");
-      }
       * {
         font-family: Roboto;
       }
@@ -17,9 +13,8 @@
         margin: 0;
         padding: 0;
       }
-      div{padding:20px}
-      kaskadi-textbox {
-        font-family: Password;
+      div{
+        padding:20px
       }
     </style>
   </head>
@@ -27,7 +22,6 @@
     <div>
       <kaskadi-textbox  id="tb" icon="/example/lgtm.svg" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
       <kaskadi-textbox style="--label-background: palegreen; --border-color: royalblue; --label-color: white" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
-      <kaskadi-textbox style="--label-background: palegreen; --border-color: royalblue; --label-color: white" lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}' typePwd></kaskadi-textbox>
       <kaskadi-textbox lang="de" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}'></kaskadi-textbox>
     </div>
     <script>
