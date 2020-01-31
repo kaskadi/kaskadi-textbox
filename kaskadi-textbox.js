@@ -107,7 +107,7 @@ function textBoxStyles () {
   return css`
     #text:focus{outline:0}
     #text{
-      font-family: var(--text-font, 'Roboto')
+      font-family: var(--text-font, 'Roboto');
       overflow: hidden;
       box-sizing: border-box;
       color: #333;
@@ -123,7 +123,7 @@ function startLabelStyles () {
   return css`
     #start_label.hidden {display:none}
     #start_label{
-      font-family: var(--label-font, 'Roboto')
+      font-family: var(--label-font, 'Roboto');
       display:flex;
       justify-content:center;
       user-select: none;
