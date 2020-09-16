@@ -1,15 +1,19 @@
 name: build-on-firefox
 on:
-  push:
+  pull_request:
+    branches:
+      - 'master'
+      - 'dev'
+    types: [opened, reopened, edited, synchronize]
     paths:
       - '**.js'
       - 'example/index.html'
 jobs:
-  build:
+  buildFF:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: test firefox
+    - name: Test Firefox
       run: |
         npm i
         npm run test.FF
