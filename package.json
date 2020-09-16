@@ -14,7 +14,6 @@
     "test.Chrome": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
     "test.All": "karma start --single-run --browsers ChromeHeadless,FirefoxHeadless karma.conf.js",
     "lint": "standard --fix",
-    "kaskadi-init": "kaskadi init && git add -u && git commit -m 'initialized from template'",
     "coverage": "npm run lint && npm run test.Chrome"
   },
   "repository": {
