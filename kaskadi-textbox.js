@@ -1,21 +1,36 @@
 /* eslint-env browser, mocha */
-// import { css, html } from 'https://cdn.klimapartner.net/modules/lit-element/lit-element.js'
 import { translate, KaskadiElement, css, html } from 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-element/kaskadi-element.js'
+
+/**
+ * Element to provide a styled text input.
+ *
+ * This offers a highlty customizable text input for any application.
+ *
+ * This element inherits properties from a base class `KaskadiElement`. To see which properties are available, please refer to [`KaskadiElement` documentation](https://github.com/kaskadi/kaskadi-element).
+ *
+ * @module kaskadi-textbox
+ *
+ * @param {Object} label - a localized set of labels that will be displayed for this textbox. Each field in the object references a language (f.e. `en`, `de`, `fr`, etc.).
+ * @param {string} [icon] - an icon to display for this textbox. Must be a URL pointing to a public image.
+ * @param {boolean} [labelHidden=false] - controls whether the textbox label & icon should be shown.
+ *
+ * @example
+ *
+ * <kaskadi-textbox style="--label-background: palegreen; --border-color: royalblue; --label-color: white" lang="en" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}' icon="https://example.com/logo.png"></kaskadi-textbox>
+ */
 
 class KaskadiTextbox extends KaskadiElement {
   constructor () {
     super()
     this.labelHidden = false
-    this.lang = 'en'
     this.icon = ''
-    this.lastValueFired = ''
+    this._lastValueFired = ''
   }
 
   static get properties () {
     return {
-      lang: { type: String },
       labelHidden: { type: Boolean },
-      label: { type: Array },
+      label: { type: Object },
       icon: { type: String }
     }
   }
@@ -49,29 +64,43 @@ class KaskadiTextbox extends KaskadiElement {
   }
 
   fireInputEvent () {
-    if (this.lastValueFired !== this.value) {
+    if (this._lastValueFired !== this.value) {
       const evt = new CustomEvent('change', {
         detail: this.value
       })
       this.dispatchEvent(evt)
-      this.lastValueFired = this.value
+      this._lastValueFired = this.value
     }
   }
 
   static get styles () {
     return css`
-      :host{
+      :host {
         display: inline-block;
+        --text-font: 'Roboto';
+        --label-font: 'Roboto';
+        --width: 250px;
+        --height: 30px;
+        --start-label-width: auto;
+        --border-width: 1px;
+        --border-color: #aaa;
+        --border-radius: 8px;
+        --border: var(--border-width) solid var(--border-color);
+        --padding: 5px;
+        --label-color: #ddd;
+        --label-background: #fafafa;
       }
-      #outer{
+      #outer {
         display: flex;
-        width: var(--width, 250px);
-        height: var(--height, 30px);
-        border: var(--border, 1px solid var(--border-color, #aaa));
-        border-radius: var(--border-radius, 8px);
+        width: var(--width);
+        height: var(--height);
+        border: var(--border);
+        border-radius: var(--border-radius);
         overflow: hidden;
       }
-      #icon img{margin-right:5px}
+      #icon img {
+        margin-right: 5px;
+      }
       ${textBoxStyles()}
       ${startLabelStyles()}
       ${endLabelStyles()}
@@ -105,33 +134,37 @@ function moveCursorToEndOfNode (node) {
 
 function textBoxStyles () {
   return css`
-    #text:focus{outline:0}
-    #text{
-      font-family: var(--text-font, 'Roboto');
+    #text:focus {
+      outline:0
+    }
+    #text {
+      font-family: var(--text-font);
       overflow: hidden;
       box-sizing: border-box;
       color: #333;
       min-width: 100px;
       width: 100%;
       white-space: nowrap;
-      padding: var(--padding, 5px);
+      padding: var(--padding);
     }
   `
 }
 
 function startLabelStyles () {
   return css`
-    #start_label.hidden {display:none}
-    #start_label{
-      font-family: var(--label-font, 'Roboto');
-      display:flex;
-      justify-content:center;
+    #start_label.hidden {
+      display: none;
+    }
+    #start_label {
+      font-family: var(--label-font);
+      display: flex;
+      justify-content: center;
       user-select: none;
-      width: var(--start-label-width, auto);
+      width: var(--start-label-width);
       box-sizing: border-box;
-      color: var(--label-color, #ddd);
-      background: var(--label-background, #fafafa);
-      padding: var(--padding, 5px);
+      color: var(--label-color);
+      background: var(--label-background);
+      padding: var(--padding);
     }
   `
 }
@@ -140,10 +173,10 @@ function endLabelStyles () {
   return css`
     #end_label{
       box-sizing: border-box;
-      padding: var(--padding, 5px);
-      min-width: var(--border-radius, 8px);
-      border-width: var(--border-width, 1px) var(--border-width, 1px) var(--border-width, 1px) 0;
-      border-radius: 0 var(--border-radius, 8px) var(--border-radius, 8px) 0;
+      padding: var(--padding);
+      min-width: var(--border-radius);
+      border-width: var(--border-width) var(--border-width) var(--border-width) 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
     }
   `
 }
