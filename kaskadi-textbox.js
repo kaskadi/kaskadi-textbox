@@ -75,18 +75,32 @@ class KaskadiTextbox extends KaskadiElement {
 
   static get styles () {
     return css`
-      :host{
+      :host {
         display: inline-block;
+        --text-font: 'Roboto';
+        --label-font: 'Roboto';
+        --width: 250px;
+        --height: 30px;
+        --start-label-width: auto;
+        --border-width: 1px;
+        --border-color: #aaa;
+        --border-radius: 8px;
+        --border: var(--border-width) solid var(--border-color);
+        --padding: 5px;
+        --label-color: #ddd;
+        --label-background: #fafafa;
       }
-      #outer{
+      #outer {
         display: flex;
-        width: var(--width, 250px);
-        height: var(--height, 30px);
-        border: var(--border, 1px solid var(--border-color, #aaa));
-        border-radius: var(--border-radius, 8px);
+        width: var(--width);
+        height: var(--height);
+        border: var(--border);
+        border-radius: var(--border-radius);
         overflow: hidden;
       }
-      #icon img{margin-right:5px}
+      #icon img {
+        margin-right: 5px;
+      }
       ${textBoxStyles()}
       ${startLabelStyles()}
       ${endLabelStyles()}
@@ -120,33 +134,37 @@ function moveCursorToEndOfNode (node) {
 
 function textBoxStyles () {
   return css`
-    #text:focus{outline:0}
-    #text{
-      font-family: var(--text-font, 'Roboto');
+    #text:focus {
+      outline:0
+    }
+    #text {
+      font-family: var(--text-font);
       overflow: hidden;
       box-sizing: border-box;
       color: #333;
       min-width: 100px;
       width: 100%;
       white-space: nowrap;
-      padding: var(--padding, 5px);
+      padding: var(--padding);
     }
   `
 }
 
 function startLabelStyles () {
   return css`
-    #start_label.hidden {display:none}
-    #start_label{
-      font-family: var(--label-font, 'Roboto');
-      display:flex;
-      justify-content:center;
+    #start_label.hidden {
+      display: none;
+    }
+    #start_label {
+      font-family: var(--label-font);
+      display: flex;
+      justify-content: center;
       user-select: none;
-      width: var(--start-label-width, auto);
+      width: var(--start-label-width);
       box-sizing: border-box;
-      color: var(--label-color, #ddd);
-      background: var(--label-background, #fafafa);
-      padding: var(--padding, 5px);
+      color: var(--label-color);
+      background: var(--label-background);
+      padding: var(--padding);
     }
   `
 }
@@ -155,10 +173,10 @@ function endLabelStyles () {
   return css`
     #end_label{
       box-sizing: border-box;
-      padding: var(--padding, 5px);
-      min-width: var(--border-radius, 8px);
-      border-width: var(--border-width, 1px) var(--border-width, 1px) var(--border-width, 1px) 0;
-      border-radius: 0 var(--border-radius, 8px) var(--border-radius, 8px) 0;
+      padding: var(--padding);
+      min-width: var(--border-radius);
+      border-width: var(--border-width) var(--border-width) var(--border-width) 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
     }
   `
 }
