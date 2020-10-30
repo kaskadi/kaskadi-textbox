@@ -13,6 +13,7 @@ import { translate, KaskadiElement, css, html } from 'https://cdn.klimapartner.n
  * @param {Object} label - a localized set of labels that will be displayed for this textbox. Each field in the object references a language (f.e. `en`, `de`, `fr`, etc.).
  * @param {string} [icon] - an icon to display for this textbox. Must be a URL pointing to a public image.
  * @param {boolean} [labelHidden=false] - controls whether the textbox label & icon should be shown.
+ * @param {Event} onchange - everytime the value in the textbox changes (either by typing, pasting or changing `.value` programmatically) and also when the element is removed from focus, a `change` event is fired. You can refer to this event via `@change` for example. It contains in its `detail` the new value of the textbox. **Note:** the event won't fire multiple times if the value did not effectively change in between 2 event firing.
  *
  * @example
  *
@@ -65,9 +66,7 @@ class KaskadiTextbox extends KaskadiElement {
 
   fireInputEvent () {
     if (this._lastValueFired !== this.value) {
-      const evt = new CustomEvent('change', {
-        detail: this.value
-      })
+      const evt = new CustomEvent('change', { detail: this.value })
       this.dispatchEvent(evt)
       this._lastValueFired = this.value
     }
