@@ -1,19 +1,16 @@
 /* eslint-env browser, mocha */
-// import { css, html } from 'https://cdn.klimapartner.net/modules/lit-element/lit-element.js'
 import { translate, KaskadiElement, css, html } from 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-element/kaskadi-element.js'
 
 class KaskadiTextbox extends KaskadiElement {
   constructor () {
     super()
     this.labelHidden = false
-    this.lang = 'en'
     this.icon = ''
     this.lastValueFired = ''
   }
 
   static get properties () {
     return {
-      lang: { type: String },
       labelHidden: { type: Boolean },
       label: { type: Array },
       icon: { type: String }
