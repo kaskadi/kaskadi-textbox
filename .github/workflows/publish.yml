@@ -5,7 +5,8 @@ on:
       - 'master'
       - 'release/**'
     paths:
-      - '**.js'
+      - '*.js'
+      - '!karma.conf.js'
       - 'example/index.html'
       - 'package.json'
 env:
@@ -13,16 +14,13 @@ env:
   AWS_KEY_SECRET: ${{ secrets.AWS_KEY_SECRET }}
   BUCKET: ${{ secrets.S3_PUBLIC_BUCKET }}
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Install dependencies
       run: npm i
-    - uses: paambaati/codeclimate-action@v2.4.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.REPORTER_ID }}
-      with:
-        coverageCommand: npm run coverage
+    - name: Test
+      run: npm test
     - name: Upload files to S3 bucket
       uses: kaskadi/action-s3cp@master
