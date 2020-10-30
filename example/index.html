@@ -14,7 +14,7 @@
         padding: 0;
       }
       div{
-        padding:20px
+        padding: 20px
       }
     </style>
   </head>
@@ -31,9 +31,9 @@
       tb.focus()
       var data = new DataTransfer()
       data.setData('Text', '123\n123')
-      let evt =  {
+      let evt = {
         clipboardData: data,
-        preventDefault: ()=>{}
+        preventDefault: () => {}
       }
       tb.paste(evt)
     })
