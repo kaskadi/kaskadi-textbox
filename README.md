@@ -61,6 +61,7 @@ This element inherits properties from a base class `KaskadiElement`. To see whic
 | label | `Object` |  | a localized set of labels that will be displayed for this textbox. Each field in the object references a language (f.e. `en`, `de`, `fr`, etc.). |
 | \[icon\] | `string` |  | an icon to display for this textbox. Must be a URL pointing to a public image. |
 | \[labelHidden\] | `boolean` | `false` | controls whether the textbox label & icon should be shown. |
+| onchange | `Event` |  | everytime the value in the textbox changes (either by typing, pasting or changing `.value` programmatically) and also when the element is removed from focus, a `change` event is fired. You can refer to this event via `@change` for example. It contains in its `detail` the new value of the textbox. **Note:** the event won't fire multiple times if the value did not effectively change in between 2 event firing. |
 
 **Example**  
 ```html
