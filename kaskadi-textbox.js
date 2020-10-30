@@ -1,18 +1,36 @@
 /* eslint-env browser, mocha */
 import { translate, KaskadiElement, css, html } from 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-element/kaskadi-element.js'
 
+/**
+ * Element to provide a styled text input.
+ *
+ * This offers a highlty customizable text input for any application.
+ *
+ * This element inherits properties from a base class `KaskadiElement`. To see which properties are available, please refer to [`KaskadiElement` documentation](https://github.com/kaskadi/kaskadi-element).
+ *
+ * @module kaskadi-textbox
+ *
+ * @param {Object} label - a localized set of labels that will be displayed for this textbox. Each field in the object references a language (f.e. `en`, `de`, `fr`, etc.).
+ * @param {string} [icon] - an icon to display for this textbox. Must be a URL pointing to a public image.
+ * @param {boolean} [labelHidden=false] - controls whether the textbox label & icon should be shown.
+ *
+ * @example
+ *
+ * <kaskadi-textbox style="--label-background: palegreen; --border-color: royalblue; --label-color: white" lang="en" label='{"en": "First Name", "de": "Vorname", "fr": "Prénom"}' icon="https://example.com/logo.png"></kaskadi-textbox>
+ */
+
 class KaskadiTextbox extends KaskadiElement {
   constructor () {
     super()
     this.labelHidden = false
     this.icon = ''
-    this.lastValueFired = ''
+    this._lastValueFired = ''
   }
 
   static get properties () {
     return {
       labelHidden: { type: Boolean },
-      label: { type: Array },
+      label: { type: Object },
       icon: { type: String }
     }
   }
@@ -46,12 +64,12 @@ class KaskadiTextbox extends KaskadiElement {
   }
 
   fireInputEvent () {
-    if (this.lastValueFired !== this.value) {
+    if (this._lastValueFired !== this.value) {
       const evt = new CustomEvent('change', {
         detail: this.value
       })
       this.dispatchEvent(evt)
-      this.lastValueFired = this.value
+      this._lastValueFired = this.value
     }
   }
 
